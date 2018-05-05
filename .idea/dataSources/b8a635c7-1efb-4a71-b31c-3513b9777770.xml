@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Derby (Remote) - sun-appserv-samples@localhost">
+  <database-model serializer="dbm" rdbms="DERBY" format-version="2.6">
+    <schema id="1" name="APP">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="NULLID"/>
+    <schema id="3" name="SQLJ"/>
+    <schema id="4" name="SYS"/>
+    <schema id="5" name="SYSCAT"/>
+    <schema id="6" name="SYSCS_DIAG"/>
+    <schema id="7" name="SYSCS_UTIL"/>
+    <schema id="8" name="SYSFUN"/>
+    <schema id="9" name="SYSIBM"/>
+    <schema id="10" name="SYSPROC"/>
+    <schema id="11" name="SYSSTAT"/>
+    <table id="12" parent="1" name="BANKACCOUNTS"/>
+    <table id="13" parent="1" name="BANKINGTRANSACTIONS"/>
+    <table id="14" parent="1" name="USERS"/>
+    <column id="15" parent="12" name="ACCOUNTNUMBER">
+      <mandatory>1</mandatory>
+      <data-type>VARCHAR(50)|12</data-type>
+    </column>
+    <column id="16" parent="12" name="User">
+      <data-type>VARCHAR(50)|12</data-type>
+    </column>
+    <column id="17" parent="12" name="BALANCE">
+      <data-type>INTEGER(10)|4</data-type>
+    </column>
+    <key id="18" parent="12" name="SQL180504231739830">
+      <name-surrogate>1</name-surrogate>
+      <columns>ACCOUNTNUMBER</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="19" parent="12" name="SQL180504231739831">
+      <name-surrogate>1</name-surrogate>
+      <columns>User</columns>
+      <ref-key>~.USERS.SQL180504231739700</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="20" parent="13" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>VARCHAR(50)|12</data-type>
+    </column>
+    <column id="21" parent="13" name="TRANSACTION_TYPE">
+      <data-type>VARCHAR(50)|12</data-type>
+    </column>
+    <column id="22" parent="13" name="AMOUNT">
+      <data-type>INTEGER(10)|4</data-type>
+    </column>
+    <column id="23" parent="13" name="DEBITACCOUNT">
+      <data-type>VARCHAR(50)|12</data-type>
+    </column>
+    <column id="24" parent="13" name="CREDITACCOUNT">
+      <data-type>VARCHAR(50)|12</data-type>
+    </column>
+    <key id="25" parent="13" name="SQL180504231739980">
+      <name-surrogate>1</name-surrogate>
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="26" parent="13" name="SQL180504231739981">
+      <name-surrogate>1</name-surrogate>
+      <columns>DEBITACCOUNT</columns>
+      <ref-key>~.BANKACCOUNTS.SQL180504231739830</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="27" parent="13" name="SQL180504231739982">
+      <name-surrogate>1</name-surrogate>
+      <columns>CREDITACCOUNT</columns>
+      <ref-key>~.BANKACCOUNTS.SQL180504231739830</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="28" parent="14" name="EMAIL">
+      <mandatory>1</mandatory>
+      <data-type>VARCHAR(50)|12</data-type>
+    </column>
+    <key id="29" parent="14" name="SQL180504231739700">
+      <name-surrogate>1</name-surrogate>
+      <columns>EMAIL</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>

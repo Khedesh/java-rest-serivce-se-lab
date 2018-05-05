@@ -1,0 +1,3 @@
+CREATE TABLE Users(Email VARCHAR(50) PRIMARY KEY)
+CREATE TABLE BankAccounts(AccountNumber VARCHAR(50) PRIMARY KEY, "User" VARCHAR(50) REFERENCES Users(Email), Balance INT)
+CREATE TABLE BankingTransactions(Id VARCHAR(50) PRIMARY KEY, Transaction_Type varchar(50), Amount INT, DebitAccount VARCHAR(50) REFERENCES BankAccounts(AccountNumber), CreditAccount VARCHAR(50) REFERENCES BankAccounts(AccountNumber))
