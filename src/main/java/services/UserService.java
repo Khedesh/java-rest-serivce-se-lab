@@ -22,6 +22,11 @@ public class UserService {
         return query.getResultList();
     }
 
+    public User get(String email)
+    {
+        return entityManager.find(User.class, email);
+    }
+
     public void create(User user) {
         entityManager.persist(user);
     }
