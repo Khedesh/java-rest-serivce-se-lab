@@ -23,7 +23,6 @@ public class DepositTransactionConverter extends BankingTransactionConverter<Dep
         JsonObject jsonObject=context.getJsonObject();
         IBankingTransactionService bankingTransactionService=context.getBankingTransactionService();
         String creditAccount = jsonObject.getString("creditAccount");
-        String debitAccount = jsonObject.getString("debitAccount");
         return bankingTransactionService.createDepositTransaction(context.getAmount(),creditAccount);
     }
 }

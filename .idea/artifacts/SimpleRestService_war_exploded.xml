@@ -7,10 +7,14 @@
           <element id="module-output" name="SimpleRestService" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: junit:junit:4.0" />
           <element id="library" level="project" name="Maven: javax:javaee-api:7.0" />
           <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.0" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: info.cukes:cucumber-core:1.2.5" />
+          <element id="library" level="project" name="Maven: info.cukes:cucumber-html:0.2.3" />
+          <element id="library" level="project" name="Maven: info.cukes:cucumber-jvm-deps:1.0.5" />
+          <element id="library" level="project" name="Maven: info.cukes:gherkin:2.12.2" />
+          <element id="library" level="project" name="Maven: info.cukes:cucumber-junit:1.2.5" />
         </element>
       </element>
       <element id="directory" name="META-INF">
