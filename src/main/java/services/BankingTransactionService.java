@@ -4,6 +4,7 @@ import facadeServices.IBankingTransactionService;
 import models.*;
 
 import javax.ejb.Stateless;
+import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -48,4 +49,7 @@ public class BankingTransactionService implements IBankingTransactionService {
         return query.getResultList();
     }
 
+    public BankingTransaction get(String id) {
+        return entityManager.find(BankingTransaction.class,id);
+    }
 }

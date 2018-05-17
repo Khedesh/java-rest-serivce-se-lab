@@ -1,5 +1,7 @@
 package controllers;
 
+import models.BankingTransaction;
+
 import javax.inject.Inject;
 import javax.json.*;
 import javax.ws.rs.*;
@@ -29,5 +31,12 @@ public class BankingTransactionController {
     @Produces("application/json")
     public JsonObject post(JsonObject jsonObject) {
         return bankingTransactionFacadeService.create(jsonObject);
+    }
+
+    @Path("/{id}")
+    @GET
+    @Produces("application/json")
+    public JsonObject get(@PathParam("id") String id) {
+        return  bankingTransactionFacadeService.get(id);
     }
 }

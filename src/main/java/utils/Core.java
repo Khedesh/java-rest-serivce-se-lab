@@ -7,11 +7,11 @@ import java.util.UUID;
  */
 public class Core {
 
-    public static String GenerateRandomUUIDString() {
-        // Creating a random UUID (Universally unique identifier).
-        UUID uuid = UUID.randomUUID();
-        return uuid.toString();
-    }
+        public static String GenerateRandomUUIDString() {
+            // Creating a random UUID (Universally unique identifier).
+            UUID uuid = UUID.randomUUID();
+            return uuid.toString();
+        }
 }
 
 

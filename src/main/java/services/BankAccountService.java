@@ -19,8 +19,13 @@ public class BankAccountService {
 
     public List<BankAccount> getAll()
     {
-        final TypedQuery<BankAccount> query = entityManager.createQuery("select ba from BankAccount ba", BankAccount.class);
+        final TypedQuery<BankAccount> query =
+                entityManager.createQuery("select ba from BankAccount ba", BankAccount.class);
         return query.getResultList();
+    }
+    public User get(String accountNumber)
+    {
+        return entityManager.find(User.class, accountNumber);
     }
 
     public void create(BankAccount bankAccount) {

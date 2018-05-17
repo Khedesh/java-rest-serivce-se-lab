@@ -12,8 +12,8 @@ import javax.persistence.Table;
 @Table(name="bankaccounts")
 public class BankAccount {
 
-    public BankAccount(String user, String accountNumber) {
-        this.user = user;
+    public BankAccount(User user, String accountNumber) {
+        this.user = user.getEmail();
         this.accountNumber = accountNumber;
     }
 

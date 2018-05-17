@@ -9,4 +9,6 @@ import javax.json.JsonObject;
 public interface IBankingTransactionFacadeService {
     JsonArray getAll();
     JsonObject create(JsonObject jsonObject);
+
+    JsonObject get(String id);
 }

@@ -1,12 +1,21 @@
 package clients;
 
-import javax.json.JsonArray;
-import javax.json.JsonString;
-import javax.json.JsonValue;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
+import models.User;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.util.EntityUtils;
+
+import javax.json.*;
 import javax.ws.rs.core.MediaType;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +23,18 @@ import java.util.List;
  * Created by Nader on 12/05/2018.
  */
 public class UserClient {
-    public List<String> getAllUsers() {
-        List<String> allUsers = new ArrayList<>();
-        Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("http://localhost:8080/SimpleRestService-1.0-SNAPSHOT/api/users");
-        JsonArray response = target.request(MediaType.APPLICATION_JSON).get(JsonArray.class);
-        for (JsonValue user : response) {
-            allUsers.add(((JsonString) user).getString());
-        }
+    private static final String RELATIVE_PATH = "users";
+    public static List<String> getAllUsers() throws IOException, URISyntaxException {
+        List<String> allUsers = new ArrayList<String>();
+        JsonArray result = RestClient.get(RELATIVE_PATH);
+        result.forEach( u-> allUsers.add(((JsonObject)u).getString("email")));
         return allUsers;
+    }
+
+    public static String createUser(String email) throws UnsupportedEncodingException {
+        JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("email", email);
+        JsonObject result = RestClient.post(RELATIVE_PATH, builder.build());
+        return result.getString("email");
     }
 }

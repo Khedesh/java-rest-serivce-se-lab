@@ -15,4 +15,6 @@ public interface IBankingTransactionService {
     DepositTransaction createDepositTransaction(int ammount, String creditAccount);
     TransferTransaction createTransferTransaction(int ammount, String debitAccount, String creditAccount);
     List<BankingTransaction> getAll();
+
+    BankingTransaction get(String id);
 }

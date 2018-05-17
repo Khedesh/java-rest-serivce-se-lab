@@ -62,6 +62,10 @@ public class BankingTransactionFacadeService implements IBankingTransactionFacad
         return convert(bankingTransaction);
     }
 
+    public JsonObject get(String id) {
+        return convert(bankingTransactionService.get(id));
+    }
+
     public JsonArray getAll()
     {
         JsonArrayBuilder builder = Json.createArrayBuilder();
