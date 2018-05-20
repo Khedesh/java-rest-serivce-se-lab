@@ -1,11 +1,13 @@
 package clients;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -32,16 +34,20 @@ public class RestClient {
         HttpGet getRequest = new HttpGet(address);
         updateUri(getRequest,params);
         getRequest.addHeader(new BasicHeader("Accept", "application/json"));
+        return executeRequest(httpClient, getRequest);
+    }
+
+    private static JsonStructure executeRequest(HttpClient httpClient, HttpUriRequest request) {
         InputStream instream = null;
-        JsonStructure result=null;
+        JsonStructure result = null;
         try {
-            HttpResponse response = httpClient.execute(getRequest);
+            HttpResponse response = httpClient.execute(request);
             HttpEntity entity = response.getEntity();
 
             if (entity != null) {
                 instream = entity.getContent();
                 result = convertStreamToJson(instream);
-               return result;
+                return result;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,29 +83,12 @@ public class RestClient {
         postRequest.addHeader(new BasicHeader("Accept", "application/json"));
         postRequest.addHeader(new BasicHeader("Content-Type", "application/json"));
         postRequest.setEntity(new StringEntity(request.toString()));
-        InputStream instream = null;
-        JsonStructure result=null;
-        try {
-            HttpResponse response = httpClient.execute(postRequest);
-            HttpEntity entity = response.getEntity();
+        return executeRequest(httpClient, postRequest);
+    }
 
-            if (entity != null) {
-                instream = entity.getContent();
-                result = convertStreamToJson(instream);
-                return result;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        } finally {
-            if (instream != null) {
-                try {
-                    instream.close();
-                } catch (Exception exc) {
-
-                }
-            }
-        }
+    private static JsonStructure convertStreamToJson(InputStream is) throws IOException {
+        JsonReader jsonReader = Json.createReader(is);
+        JsonStructure result = jsonReader.read();
         return result;
     }
 
@@ -113,11 +102,5 @@ public class RestClient {
 
     public static <T extends JsonStructure> T post(String relativePath, JsonStructure request) throws UnsupportedEncodingException {
         return (T) postJson(BASE_PATH + relativePath,request);
-    }
-
-    private static JsonStructure convertStreamToJson(InputStream is) throws IOException {
-        JsonReader jsonReader = Json.createReader(is);
-        JsonStructure result = jsonReader.read();
-        return result;
     }
 }

@@ -12,8 +12,13 @@ import javax.ws.rs.*;
  */
 @Path("/users")
 public class UserController {
+
+    private final UserService userService;
+
     @Inject
-    UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     private static JsonObject convertToJson(User user) {
         JsonObjectBuilder builder = Json.createObjectBuilder();

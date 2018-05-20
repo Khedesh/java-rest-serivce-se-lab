@@ -20,7 +20,9 @@ public class BankingTransactionService implements IBankingTransactionService {
 
     public WithDrawTransaction createWithDrawTransaction(int ammount, String debitAccount) {
         BankAccount bankAccount = entityManager.find(BankAccount.class, debitAccount);
+
         WithDrawTransaction withDrawTransaction = bankAccount.withdraw(ammount);
+
         entityManager.persist(bankAccount);
         entityManager.persist(withDrawTransaction);
         return withDrawTransaction;
@@ -28,7 +30,9 @@ public class BankingTransactionService implements IBankingTransactionService {
 
     public DepositTransaction createDepositTransaction(int ammount, String creditAccount) {
         BankAccount bankAccount = entityManager.find(BankAccount.class, creditAccount);
+
         DepositTransaction depositTransaction = bankAccount.deposit(ammount);
+
         entityManager.persist(bankAccount);
         entityManager.persist(depositTransaction);
         return depositTransaction;
@@ -37,7 +41,9 @@ public class BankingTransactionService implements IBankingTransactionService {
     public TransferTransaction createTransferTransaction(int ammount, String debitAccount, String creditAccount) {
         BankAccount fromAccount = entityManager.find(BankAccount.class, debitAccount);
         BankAccount toAccount = entityManager.find(BankAccount.class, creditAccount);
+
         TransferTransaction transferTransaction = fromAccount.transferTo(ammount, toAccount);
+
         entityManager.persist(fromAccount);
         entityManager.persist(toAccount);
         entityManager.persist(transferTransaction);

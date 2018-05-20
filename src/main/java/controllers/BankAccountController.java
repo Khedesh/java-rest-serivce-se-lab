@@ -16,7 +16,7 @@ import javax.ws.rs.*;
 public class BankAccountController {
 
     private final UserService userService;
-    BankAccountService bankAccountService;
+    private final BankAccountService bankAccountService;
 
     @Inject
     public BankAccountController(BankAccountService bankAccountService, UserService userService) {

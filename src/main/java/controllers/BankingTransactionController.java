@@ -11,7 +11,7 @@ import javax.ws.rs.*;
  */
 @Path("/bankingtransactions")
 public class BankingTransactionController {
-    IBankingTransactionFacadeService bankingTransactionFacadeService;
+    private final IBankingTransactionFacadeService bankingTransactionFacadeService;
 
     @Inject
     public BankingTransactionController(IBankingTransactionFacadeService bankingTransactionFacadeService) {

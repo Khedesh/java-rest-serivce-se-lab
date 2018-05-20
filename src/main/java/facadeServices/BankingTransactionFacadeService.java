@@ -46,7 +46,7 @@ public class BankingTransactionFacadeService implements IBankingTransactionFacad
                 .convertJsonObject(jsonObject, bankingTransactionService);
     }
 
-    private IBankingTransactionService bankingTransactionService;
+    private final IBankingTransactionService bankingTransactionService;
 
     @Inject
     public BankingTransactionFacadeService(IBankingTransactionService bankingTransactionService) {
@@ -55,6 +55,7 @@ public class BankingTransactionFacadeService implements IBankingTransactionFacad
 
     protected BankingTransactionFacadeService() {
         //For CDI
+        this.bankingTransactionService=null;
     }
 
     public JsonObject create(JsonObject jsonObject){
