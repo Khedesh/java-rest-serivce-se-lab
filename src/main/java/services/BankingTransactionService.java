@@ -21,6 +21,9 @@ public class BankingTransactionService implements IBankingTransactionService {
     public WithDrawTransaction createWithDrawTransaction(int ammount, String debitAccount) {
         BankAccount bankAccount = entityManager.find(BankAccount.class, debitAccount);
 
+        if (ammount > bankAccount.getBalance())
+            throw new IllegalStateException("Balance is not sufficient");
+
         WithDrawTransaction withDrawTransaction = bankAccount.withdraw(ammount);
 
         entityManager.persist(bankAccount);
@@ -41,6 +44,9 @@ public class BankingTransactionService implements IBankingTransactionService {
     public TransferTransaction createTransferTransaction(int ammount, String debitAccount, String creditAccount) {
         BankAccount fromAccount = entityManager.find(BankAccount.class, debitAccount);
         BankAccount toAccount = entityManager.find(BankAccount.class, creditAccount);
+
+        if(ammount > fromAccount.getBalance())
+            throw new IllegalStateException("Balance not sufficient");
 
         TransferTransaction transferTransaction = fromAccount.transferTo(ammount, toAccount);
 

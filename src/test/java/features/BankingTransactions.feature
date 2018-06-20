@@ -27,3 +27,25 @@ Feature: Banking Transactions
     And I should find a bank account with account number "1234567" and balance 50 for user "salam@alayk"
     And I should find a deposit transaction on credit account "123456" with amount 200
     And I should find a transfer transaction from account "123456" to account "1234567" with amount 50
+
+  Scenario: Withdraw failure
+    Given I have registered a user with email "salam@alayk"
+    And I have registered a bank account with account number "123456" for user "salam@alayk"
+    When I deposit 100 units in account "123456"
+    And I withdraw 500 units from account "123456"
+
+  Scenario: User not found
+    Given I have registered a user with email "salam@alayk"
+    And I have registered a bank account with account number "123456" for user "salam@alayk"
+    When I deposit 100 units in account "123457"
+
+  Scenario: User not found
+    Given I have registered a user with email "salam@alayk"
+    And I have registered a bank account with account number "123456" for user "salam@alaykom"
+
+  Scenario: Transfer failure
+    Given I have registered a user with email "salam@alayk"
+    And I have registered a bank account with account number "123456" for user "salam@alayk"
+    And I have registered a bank account with account number "1234567" for user "salam@alayk"
+    When I deposit 200 units in account "123456"
+    And I Transfer 550 units from account "123456" to account "1234567"

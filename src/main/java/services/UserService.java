@@ -28,6 +28,8 @@ public class UserService {
     }
 
     public void create(User user) {
+        if (!user.getEmail().matches("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+$"))
+            throw new IllegalStateException("User email bad formatted");
         entityManager.persist(user);
     }
 }
